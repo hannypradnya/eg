@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="id" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SAD DARŚANA: THE GOLDEN WISDOM QUEST</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        cosmic: {
+                            900: '#070B19',
+                            800: '#0F172A',
+                            700: '#1E1B4B',
+                            600: '#312E81',
+                            accent: '#F59E0B',
+                            gold: '#D4AF37',
+                            pink: '#EC4899',
+                            glow: '#8B5CF6'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            background-color: #070B19;
+            color: #F8FAFC;
+            font-family: 'Inter', sans-serif;
+            overflow-x: hidden;
+        }
+        .cosmic-gradient {
+            background: radial-gradient(circle at 50% 20%, #1E1B4B 0%, #0F172A 50%, #070B19 100%);
+        }
+        .glass-card {
+            background: rgba(30, 27, 75, 0.4);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(212, 175, 55, 0.2);
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+        }
+        .glass-card:hover {
+            border-color: rgba(212, 175, 55, 0.5);
+            box-shadow: 0 0 20px rgba(139, 92, 246, 0.3);
+        }
+        .gold-glow {
+            text-shadow: 0 0 15px rgba(212, 175, 55, 0.6);
+        }
+        .starfield {
+            background-image: radial-gradient(white 1px, transparent 0);
+            background-size: 50px 50px;
+        }
+        @media (prefers-reduced-motion: reduce) {
+            * { animation: none !important; transition: none !important; }
+        }
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #070B19; }
+        ::-webkit-scrollbar-thumb { background: #312E81; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #8B5CF6; }
+    </style>
+</head>
+<body class="starfield min-h-screen flex flex-col justify-between cosmic-gradient">
+
+    <!-- TOP NAVIGATION BAR -->
+    <header class="glass-card sticky top-0 z-50 px-6 py-4 flex items-center justify-between border-b border-purple-900/50" role="banner">
+        <div class="flex items-center space-x-3 cursor-pointer focus:outline-none focus:ring-2 focus:ring-amber-400 rounded-lg" tabindex="0" onclick="app.navigateTo('home')" onkeypress="if(event.key==='Enter')app.navigateTo('home')">
+            <div class="w-10 h-10 rounded-full bg-gradient-to-tr from-yellow-500 to-purple-600 flex items-center justify-center shadow-lg shadow-purple-500/50">
+                <span class="text-xl font-bold text-white" aria-hidden="true">ॐ</span>
+            </div>
+            <div>
+                <h1 class="text-lg font-bold tracking-wider text-amber-300 gold-glow">SAD DARŚANA</h1>
+                <p class="text-xs text-purple-300">The Golden Wisdom Quest</p>
+            </div>
+        </div>
+
+        <!-- Desktop Menu -->
+        <nav class="hidden xl:flex items-center space-x-3 text-xs font-medium" role="navigation" aria-label="Menu Utama">
+            <button onclick="app.navigateTo('home')" class="hover:text-amber-400 transition focus:outline-none focus:ring-2 focus:ring-amber-400 p-1 rounded">Beranda</button>
+            <button onclick="app.navigateTo('guide')" class="hover:text-amber-400 transition focus:outline-none focus:ring-2 focus:ring-amber-400 p-1 rounded">Petunjuk</button>
+            <button onclick="app.navigateTo('map')" class="hover:text-amber-400 transition focus:outline-none focus:ring-2 focus:ring-amber-400 p-1 rounded">Peta Pustaka</button>
+            <button onclick="app.navigateTo('darshana')" class="hover:text-amber-400 transition focus:outline-none focus:ring-2 focus:ring-amber-400 p-1 rounded">Materi</button>
+            <button onclick="app.navigateTo('games-hub')" class="hover:text-amber-400 transition text-amber-300 font-bold focus:outline-none focus:ring-2 focus:ring-amber-400 p-1 rounded">Games Hub</button>
+            <button onclick="app.navigateTo('quiz')" class="hover:text-amber-400 transition font-bold text-amber-400 focus:outline-none focus:ring-2 focus:ring-amber-400 p-1 rounded">Kuis (30 Soal)</button>
+            <button onclick="app.navigateTo('creators')" class="hover:text-amber-400 transition focus:outline-none focus:ring-2 focus:ring-amber-400 p-1 rounded">Kelompok 3</button>
+            <button onclick="app.navigateTo('reflection')" class="hover:text-amber-400 transition focus:outline-none focus:ring-2 focus:ring-amber-400 p-1 rounded">Refleksi</button>
+        </nav>
+
+        <div class="flex items-center space-x-4">
+            <div class="hidden sm:flex flex-col text-right">
+                <span class="text-xs text-purple-300">Progres Belajar</span>
+                <span id="global-progress" class="text-sm font-bold text-amber-400">0%</span>
+            </div>
+            <button onclick="app.toggleMobileMenu()" class="xl:hidden text-amber-300 focus:outline-none focus:ring-2 focus:ring-amber-400 p-1 rounded" aria-label="Buka Menu Navigasi">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
+                </svg>
+            </button>
+        </div>
+    </header>
+
+    <!-- MOBILE MENU -->
+    <div id="mobile-menu" class="fixed inset-0 z-40 bg-black/95 backdrop-blur-xl hidden flex flex-col justify-center items-center space-y-4 text-base" role="dialog" aria-label="Menu Navigasi Seluler">
+        <button onclick="app.navigateTo('home'); app.toggleMobileMenu();" class="hover:text-amber-400">Beranda</button>
+        <button onclick="app.navigateTo('guide'); app.toggleMobileMenu();" class="hover:text-amber-400">Petunjuk Penggunaan</button>
+        <button onclick="app.navigateTo('map'); app.toggleMobileMenu();" class="hover:text-amber-400">Peta Sad Darśana</button>
+        <button onclick="app.navigateTo('darshana'); app.toggleMobileMenu();" class="hover:text-amber-400">Materi Enam Aliran</button>
+        <button onclick="app.navigateTo('games-hub'); app.toggleMobileMenu();" class="hover:text-amber-400 font-bold text-amber-300">Games Hub</button>
+        <button onclick="app.navigateTo('quiz'); app.toggleMobileMenu();" class="hover:text-amber-400 font-bold text-amber-400">Kuis Evaluasi (30 Soal)</button>
+        <button onclick="app.navigateTo('creators'); app.toggleMobileMenu();" class="hover:text-amber-400">Identitas Pembuat (Kelompok 3)</button>
+        <button onclick="app.navigateTo('results'); app.toggleMobileMenu();" class="hover:text-amber-400">Hasil & Analisis Belajar</button>
+        <button onclick="app.navigateTo('reflection'); app.toggleMobileMenu();" class="hover:text-amber-400">Refleksi</button>
+        <button onclick="app.navigateTo('references'); app.toggleMobileMenu();" class="hover:text-amber-400">Daftar Sumber</button>
+        <button onclick="app.toggleMobileMenu()" class="absolute top-6 right-6 text-gray-400 hover:text-white text-2xl" aria-label="Tutup Menu">&times;</button>
+    </div>
+
+    <!-- MAIN APP CONTAINER -->
+    <main class="flex-grow container mx-auto px-4 py-8 max-w-5xl" role="main">
+
+        <!-- 1. BERANDA -->
+        <section id="page-home" class="view-page space-y-8">
+            <div class="text-center py-12 glass-card rounded-3xl p-8 relative overflow-hidden">
+                <div class="absolute -right-10 -top-10 w-40 h-40 bg-purple-600/20 rounded-full blur-3xl"></div>
+                <div class="absolute -left-10 -bottom-10 w-40 h-40 bg-amber-500/20 rounded-full blur-3xl"></div>
+                
+                <span class="px-4 py-1.5 rounded-full text-xs font-semibold bg-amber-500/10 text-amber-300 border border-amber-500/30">MEDIA PEMBELAJARAN INTERAKTIF (MPI)</span>
+                <h2 class="text-4xl md:text-6xl font-extrabold mt-6 mb-4 tracking-tight">
+                    SAD DARŚANA <br/><span class="text-amber-400 gold-glow">THE GOLDEN WISDOM QUEST</span>
+                </h2>
+                <p class="text-purple-200 max-w-2xl mx-auto text-base md:text-lg mb-8">
+                    Menjelajahi hakikat filosofis tertinggi dalam tradisi Hindu berdasarkan Buku Ajar Darsana oleh Rsi Ida Bagus Wika Krishna[span_0](start_span)[span_0](end_span). Dilengkapi kuis komprehensif 30 soal, game interaktif, dan analisis hasil belajar.
+                </p>
+                <div class="flex flex-wrap justify-center gap-4">
+                    <button onclick="app.navigateTo('map')" class="px-8 py-3.5 bg-gradient-to-r from-amber-500 to-yellow-600 text-gray-950 font-bold rounded-xl shadow-lg hover:scale-105 transition transform focus:outline-none focus:ring-2 focus:ring-amber-300">
+                        Mulai Petualangan Kosmik
+                    </button>
+                    <button onclick="app.navigateTo('quiz')" class="px-8 py-3.5 bg-purple-700/60 border border-purple-500 text-amber-300 font-semibold rounded-xl hover:bg-purple-600 transition focus:outline-none focus:ring-2 focus:ring-amber-300">
+                        📝 Kuis Evaluasi (30 Soal)
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- 2. PETUNJUK -->
+        <section id="page-guide" class="view-page hidden space-y-6">
+            <div class="glass-card p-8 rounded-2xl space-y-4">
+                <h2 class="text-2xl font-bold text-amber-300">🧭 Petunjuk Penggunaan MPI</h2>
+                <p class="text-gray-300 text-sm leading-relaxed">Pelajari materi secara terstruktur, uji kemampuan dengan game edukatif, dan selesaikan kuis evaluasi 30 soal untuk mendapatkan analisis hasil belajar dan rekomendasi belajar.</p>
+                <div class="flex justify-between pt-4">
+                    <button onclick="app.navigateTo('home')" class="px-6 py-2.5 glass-card rounded-xl text-sm font-semibold">← Beranda</button>
+                    <button onclick="app.navigateTo('map')" class="px-6 py-2.5 bg-amber-500 text-gray-950 font-bold rounded-xl text-sm">Peta Pustaka →</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- 3. PETA SAD DARŚANA -->
+        <section id="page-map" class="view-page hidden space-y-6">
+            <div class="glass-card p-8 rounded-2xl space-y-6">
+                <h2 class="text-2xl font-bold text-amber-300">🗺️ Peta Pembelajaran & Knowledge Quest</h2>
+                <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+                    <div onclick="app.navigateTo('darshana')" class="glass-card p-5 rounded-xl cursor-pointer hover:border-amber-400 transition" tabindex="0">
+                        <h3 class="font-bold text-amber-300">01. Pengantar Darśana</h3>
+                        <p class="text-xs text-gray-400 mt-1">Astika & Nastika[span_1](start_span)[span_1](end_span).</p>
+                    </div>
+                    <div onclick="app.navigateTo('nyaya')" class="glass-card p-5 rounded-xl cursor-pointer hover:border-amber-400 transition" tabindex="0">
+                        <h3 class="font-bold text-amber-300">02. Nyaya Darśana</h3>
+                        <p class="text-xs text-gray-400 mt-1">Logika & Catur Pramana[span_2](start_span)[span_2](end_span)[span_3](start_span)[span_3](end_span).</p>
+                    </div>
+                    <div onclick="app.navigateTo('vaisheshika')" class="glass-card p-5 rounded-xl cursor-pointer hover:border-amber-400 transition" tabindex="0">
+                        <h3 class="font-bold text-amber-300">03. Waiśesika Darśana</h3>
+                        <p class="text-xs text-gray-400 mt-1">7 Kategori Padartha[span_4](start_span)[span_4](end_span).</p>
+                    </div>
+                    <div onclick="app.navigateTo('samkhya')" class="glass-card p-5 rounded-xl cursor-pointer hover:border-amber-400 transition" tabindex="0">
+                        <h3 class="font-bold text-amber-300">04. Sāmkhya Darśana</h3>
+                        <p class="text-xs text-gray-400 mt-1">Purusa-Prakrti & Triguna[span_5](start_span)[span_5](end_span)[span_6](start_span)[span_6](end_span).</p>
+                    </div>
+                    <div onclick="app.navigateTo('yoga')" class="glass-card p-5 rounded-xl cursor-pointer hover:border-amber-400 transition" tabindex="0">
+                        <h3 class="font-bold text-amber-300">05. Yoga Darśana</h3>
+                        <p class="text-xs text-gray-400 mt-1">Astangga Yoga Patanjali[span_7](start_span)[span_7](end_span)[span_8](start_span)[span_8](end_span).</p>
+                    </div>
+                    <div onclick="app.navigateTo('mimamsa')" class="glass-card p-5 rounded-xl cursor-pointer hover:border-amber-400 transition" tabindex="0">
+                        <h3 class="font-bold text-amber-300">06. Mīmāmsa & Wedanta</h3>
+                        <p class="text-xs text-gray-400 mt-1">Ritual Yajna & Filsafat Skolastik[span_9](start_span)[span_9](end_span)[span_10](start_span)[span_10](end_span).</p>
+                    </div>
+                </div>
+                <div class="pt-4 border-t border-purple-800 flex justify-between items-center">
+                    <span class="text-xs text-purple-300">Lanjutkan penjelajahan:</span>
+                    <button onclick="app.navigateTo('games-hub')" class="px-6 py-2.5 bg-gradient-to-r from-amber-500 to-yellow-600 text-gray-950 font-bold rounded-xl text-sm">Buka Games Hub 🎮</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- 4. MATERI UTAMA -->
+        <section id="page-darshana" class="view-page hidden space-y-6">
+            <div class="glass-card p-8 rounded-2xl space-y-4">
+                <span class="text-xs text-amber-400 font-semibold uppercase">Modul Utama</span>
+                <h2 class="text-3xl font-extrabold text-white">Pengantar Filsafat & Sad Darśana</h2>
+                <p class="text-gray-300 text-sm leading-relaxed">
+                    Kata <strong>Darśana</strong> berasal dari urat kata <em>'drs'</em> yang artinya melihat atau mengalami[span_11](start_span)[span_11](end_span). Filsafat Hindu (Sad Darśana) berakar kuat pada otoritas Weda[span_12](start_span)[span_12](end_span)[span_13](start_span)[span_13](end_span). Klasifikasi filsafat India terbagi atas <strong>Astika</strong> (mengakui otoritas Weda) dan <strong>Nastika</strong> (menolak Weda seperti Carwaka, Jaina, Buddha)[span_14](start_span)[span_14](end_span).
+                </p>
+                <div class="flex justify-between pt-4">
+                    <button onclick="app.navigateTo('map')" class="px-6 py-2.5 glass-card rounded-xl text-sm font-semibold">← Peta</button>
+                    <button onclick="app.navigateTo('nyaya')" class="px-6 py-2.5 bg-amber-500 text-gray-950 font-bold rounded-xl text-sm">Lanjut: Nyaya →</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- SUB HALAMAN ALIRAN -->
+        <section id="page-nyaya" class="view-page hidden space-y-6">
+            <div class="glass-card p-8 rounded-2xl space-y-4">
+                <h2 class="text-2xl font-bold text-amber-300">1. Nyaya Darśana</h2>
+                <p class="text-gray-300 text-sm">Didirikan oleh Rsi Gautama (Aksapada)[span_15](start_span)[span_15](end_span). Menekankan logika dan epistemologi melalui <strong>Catur Pramana</strong> (Pratyaksa, Anumana, Upamana, Sabda)[span_16](start_span)[span_16](end_span)[span_17](start_span)[span_17](end_span). Tujuan akhir: Apawarga[span_18](start_span)[span_18](end_span)[span_19](start_span)[span_19](end_span).</p>
+                <div class="flex justify-between pt-4">
+                    <button onclick="app.navigateTo('darshana')" class="px-6 py-2.5 glass-card rounded-xl text-sm">← Sebelumnya</button>
+                    <button onclick="app.navigateTo('vaisheshika')" class="px-6 py-2.5 bg-amber-500 text-gray-950 font-bold rounded-xl text-sm">Lanjut: Waiśesika →</button>
+                </div>
+            </div>
+        </section>
+
+        <section id="page-vaisheshika" class="view-page hidden space-y-6">
+            <div class="glass-card p-8 rounded-2xl space-y-4">
+                <h2 class="text-2xl font-bold text-amber-300">2. Waiśesika Darśana</h2>
+                <p class="text-gray-300 text-sm">Didirikan oleh Rsi Kanada[span_20](start_span)[span_20](end_span). Mengajarkan pluralisme atomik dengan 7 kategori realitas (<strong>Padartha</strong>: Drawya, Guna, Karma, Samanya, Visesa, Samawaya, Abhava)[span_21](start_span)[span_21](end_span)[span_22](start_span)[span_22](end_span).</p>
+                <div class="flex justify-between pt-4">
+                    <button onclick="app.navigateTo('nyaya')" class="px-6 py-2.5 glass-card rounded-xl text-sm">← Nyaya</button>
+                    <button onclick="app.navigateTo('samkhya')" class="px-6 py-2.5 bg-amber-500 text-gray-950 font-bold rounded-xl text-sm">Lanjut: Sāmkhya →</button>
+                </div>
+            </div>
+        </section>
+
+        <section id="page-samkhya" class="view-page hidden space-y-6">
+            <div class="glass-card p-8 rounded-2xl space-y-4">
+                <h2 class="text-2xl font-bold text-amber-300">3. Sāmkhya Darśana</h2>
+                <p class="text-gray-300 text-sm">Didirikan oleh Sri Kapila Muni[span_23](start_span)[span_23](end_span). Mengajarkan dualisme Purusa (roh) dan Prakrti (materi) beserta 25 Tattwas[span_24](start_span)[span_24](end_span)[span_25](start_span)[span_25](end_span), digerakkan oleh <strong>Triguna</strong> (Sattwa, Rajas, Tamas)[span_26](start_span)[span_26](end_span)[span_27](start_span)[span_27](end_span).</p>
+                <div class="flex justify-between pt-4">
+                    <button onclick="app.navigateTo('vaisheshika')" class="px-6 py-2.5 glass-card rounded-xl text-sm">← Waiśesika</button>
+                    <button onclick="app.navigateTo('yoga')" class="px-6 py-2.5 bg-amber-500 text-gray-950 font-bold rounded-xl text-sm">Lanjut: Yoga →</button>
+                </div>
+            </div>
+        </section>
+
+        <section id="page-yoga" class="view-page hidden space-y-6">
+            <div class="glass-card p-8 rounded-2xl space-y-4">
+                <h2 class="text-2xl font-bold text-amber-300">4. Yoga Darśana</h2>
+                <p class="text-gray-300 text-sm">Didirikan oleh Maharsi Patanjali[span_28](start_span)[span_28](end_span). <em>"Yogas Citta Wrtti Nirodah"</em>[span_29](start_span)[span_29](end_span). Mengembangkan <strong>Astangga Yoga</strong> (Yama, Niyama, Asana, Pranayama, Pratyahara, Dharana, Dhyana, Samadhi)[span_30](start_span)[span_30](end_span)[span_31](start_span)[span_31](end_span).</p>
+                <div class="flex justify-between pt-4">
+                    <button onclick="app.navigateTo('samkhya')" class="px-6 py-2.5 glass-card rounded-xl text-sm">← Sāmkhya</button>
+                    <button onclick="app.navigateTo('mimamsa')" class="px-6 py-2.5 bg-amber-500 text-gray-950 font-bold rounded-xl text-sm">Lanjut: Mīmāmsa & Wedanta →</button>
+                </div>
+            </div>
+        </section>
+
+        <section id="page-mimamsa" class="view-page hidden space-y-6">
+            <div class="glass-card p-8 rounded-2xl space-y-4">
+                <h2 class="text-2xl font-bold text-amber-300">5 & 6. Mīmāmsa & Wedanta Darśana</h2>
+                <p class="text-gray-300 text-sm">M
